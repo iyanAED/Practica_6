@@ -226,7 +226,9 @@ Dibuja las matrices de correlación del conjunto de notas numéricas.
 Podemos usar `pairs` del paquete base o bien `ggcorr` y `ggpairs` de la librería `GGally`.
 
 ```{r Solucion_Ej8, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
+library(GGally)
 
+ggpairs(Datos %>% select(ends_with('.num')))
 ```
 
 # Análisis bivariante de variables categóricas
@@ -242,13 +244,18 @@ Nota: usa la función `chisq.test` con el parámetro `correct=FALSE` y analiza s
 
 ```{r Solucion_Ej9, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
 
-```
+test_alg_anm <- chisq.test(Datos$ALG.cat, Datos$ANM.cat, correct = FALSE)
 
+test_alg_anm
+```
+Como el p-valor es bajo (p-valor<0.05) hay suficiente evidencia estadística para rechazar la hipótesis nula en favor de la hipótesis alternativa.
 
 ```{r Solucion_Ej9b, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
+test_alg_sex <- chisq.test(Datos$ALG.num, Datos$Sex, correct = FALSE)
 
+test_alg_sex
 ```
-
+Como el p-valor es alto, no hay suficiente evidencia estadística para rechazar la hipótresis nula de independencia.
 
 
 
